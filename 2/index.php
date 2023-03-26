@@ -1,21 +1,11 @@
 <?php
-    // // input data pegawai
-    // $nama = "John Doe";
-    // $jabatan = "Manager";
-    // $gaji_pokok = 0;
-    // $tunjangan_jabatan = 0;
-    // $tunjangan_keluarga = 0;
-    // $gaji_kotor = 0;
-    // $zakat_profesi = 0;
-    // $take_home_pay = 0;
-    // $status = "menikah";
-    // $jml_anak = 3;
 
     if (isset($_POST['submit'])) {
 
         $nama = $_POST['nama'];
         $jabatan = $_POST['jabatan'];
         $status = $_POST['status'];
+        $agama = $_POST['agama'];
 
 
 
@@ -40,9 +30,9 @@
         // hitung tunjangan jabatan
         $tunjangan_jabatan = 0.2 * $gaji_pokok;
 
-        if ($status = 1 && $jml_anak < 3) {
+        if ($status == 2) {
             $tunjangan_keluarga = 0.05 * $gaji_pokok;
-        }else if ($status = 2 && $jml_anak > 2){
+        }else if ($status == 3){
             $tunjangan_keluarga = 0.1 * $gaji_pokok;
         }else{
             $tunjangan_keluarga = 0;
@@ -52,9 +42,9 @@
         // hitung gaji kotor
         $gaji_kotor = $gaji_pokok + $tunjangan_jabatan + $tunjangan_keluarga;
 
+
         // hitung zakat profesi
-        $muslim = true;
-        $zakat_profesi = ($muslim && $gaji_kotor >= 6000000) ? 0.025 * $gaji_kotor : 0;
+        $zakat_profesi = ($agama == 1 && $gaji_kotor >= 6000000) ? 0.025 * $gaji_kotor : 0;
 
         // hitung take home pay
         $take_home_pay = $gaji_kotor - $zakat_profesi;
@@ -157,6 +147,15 @@
                             <option value="1">Belum Menikah</option>
                             <option value="2">Menikah & 2 Anak/Kurang</option>
                             <option value="3">Menikah & 3 Anak/Lebih</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Agama</b></td>
+                    <td>
+                        <select name="agama">
+                            <option value="1">Muslim</option>
+                            <option value="2">Non Muslim</option>
                         </select>
                     </td>
                 </tr>
