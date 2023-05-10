@@ -13,7 +13,9 @@
         include_once 'dashboard.php';
     } else if (!empty($url)){
         include_once "$url.php";
-    } 
+    } else { 
+        include_once 'dashboard.php';
+    }
 
 
 ?>
